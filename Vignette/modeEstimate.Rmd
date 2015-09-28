@@ -1,0 +1,44 @@
+---
+title: "Mode Estimation"
+author: "Trevor Michelson"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Mode Estimation}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+output:
+  BiocStyle::html_document
+---
+
+## Introduction
+
+This particular function simply takes a vector of numeric values and computes an estimate for the mode. Useful when there is a vector of numbers that does not have a repeat in any numbers, this function will give a rough estimate to the mode. This does however mean that if there is a clear mode that exists, say if a vector is equal to (1, 4, 4, 4, 4, 5), it will only give an estimate of the clear mode, 4.
+
+# More Examples
+
+
+#Example without a clear mode
+```
+modeEstimate <- function(x) {
+  d <- density(x)
+  d$x[which.max(d$y)]
+}
+
+x <- c(1.3, 2.3, 3.2, 4.4, 5.7)
+modeEstimate(x)
+##[1] 2.68576
+```
+
+#Example with clear mode
+```
+x <- c(1, 2, 2, 2, 2, 3.5, 5)
+modeEstimate(x)
+##[1] 1.99989
+```
+
+# Session Info
+```
+{r session_info}
+sessionInfo()
+```
